@@ -1,0 +1,1 @@
+(()=>{"use strict";document.getElementById("root").appendChild(function(){const e=document.createElement("div");return e.textContent="Hello World 8.webpack-ex01",e}())})();
