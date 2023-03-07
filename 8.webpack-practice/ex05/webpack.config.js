@@ -8,10 +8,10 @@ module.exports = {
     },
     module: {
         rules:[{
-            test: /\.css$/i,   /* css로 끝나는, 대소문자 구분하지 않는 */
-            use: ['style-loader', 'css-loader']
+            test: /\.(c|sa|sc)ss$/i, 
+            use: ['style-loader', 'css-loader', 'sass-loader']
         }]
-    },
+    }, 
     devServer: {
         host: '0.0.0.0',  /** 접근하는 ip 다 허용 */
         port: 9090,

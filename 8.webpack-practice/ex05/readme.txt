@@ -6,8 +6,8 @@ ex05: SASS/SCSS Module 번들링하기
 2. CSS Loader 설정(webpack.config.js) 설정
   module: {
         rules:[{
-            test: /\.css$/i, 
-            use: ['style-loader', 'css-loader']
+            test: /\.(c|sa|sc)ss$/i, 
+            use: ['style-loader', 'css-loader', 'sass-loader']
         }]
     }   
 
