@@ -1,12 +1,12 @@
-ex04: CSS Module 번들링하기
+ex05: SASS/SCSS Module 번들링하기
 
 1. 설치 패키지
-[ex02]$ npm i -D webpack webpack-cli webpack-dev-server style-loader css-loader
+[ex02]$ npm i -D webpack webpack-cli webpack-dev-server style-loader css-loader sass-loader node-sass
 
 2. CSS Loader 설정(webpack.config.js) 설정
   module: {
         rules:[{
-            test: /\.css$/i,   /* css로 끝나는, 대소문자 구분하지 않는 */
+            test: /\.css$/i, 
             use: ['style-loader', 'css-loader']
         }]
     }   
