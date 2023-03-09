@@ -10,3 +10,17 @@ React Practice
 
 8. [참고 1] webpack-practice
 9. [참고 2] babel-practice
+
+
+
+kanvanboard
+    |-- backend
+    |-- frontend
+
+emaillist
+    |-- backend
+    |-- frontend
+
+mysite07(guestbook, gallery)
+    |-- backend
+    |-- frontend
