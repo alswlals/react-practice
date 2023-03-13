@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-export default class TitelBar01 extends Component {
+export default class TitleBar01 extends Component {
     constructor(props){
         super(props);
         /* this.no VS this.state.no */
