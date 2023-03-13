@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './assets/css/Task.css'
-const Task = ({no, name, done}) => {
+const Task = ({no, cardNo, name, done, callback}) => {
     return (
-        <li class={styles.TaskList__Task}>
-        <input type='checkbox' checked={done} />
+        <li className={styles.TaskList__Task}>
+        <input type='checkbox' checked={done} onChange={e => {callback(cardNo, no, e.target.checked)}} />
         {name}
-        <a href='#' class={styles.TaskList__Task__remove} />
+        <a href='#' className={styles.TaskList__Task__remove} />
       </li>
     );
 };
