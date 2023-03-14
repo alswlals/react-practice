@@ -4,12 +4,17 @@ import Clock from './Clock';
 
 export default function App() {
     const [ticks, setTicks] = useState(0); //10의 배수일 때 없어지게 함
-
+    const [date, setDate] = useState(new Date());
     useEffect(() => {
-        setInterval(function(){
-//ticks ++
-        }, 1000)
+        let timerID = setInterval(() => {
+            setDate(new Date());  
+            setTicks((ticks) => ticks+1);
+        }, 1000);
+        return (function(){
+            clearInterval(timerID);
+        });   
     }, [])
+
     return (
         <div>
             <span>{ticks}</span>
@@ -17,11 +22,10 @@ export default function App() {
             {
                 ticks % 10 === 0 ? 
                 null :
-                <Clock
-                    message={'ex05: useEffect Hook example'}
-                    hours={state.hours}
-                    minutes={state.minutes}
-                    seconds={state.seconds}/>
+                <Clock 
+                        hours={date.getHours()}
+                        minutes={('0'+date.getMinutes()).slice(-2)}
+                        seconds={('0'+date.getSeconds()).slice(-2)} />
                 }
         </div>
     );
