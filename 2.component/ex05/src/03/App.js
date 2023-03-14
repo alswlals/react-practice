@@ -5,13 +5,20 @@ import Clock from './Clock';
 export default class App extends Component {
     constructor() {
         super(...arguments);
-    }
+    };
 
+   const [hours, setHours] = useState(second); 
+   
     render() {
         return (
             <div className='clock-display'>
                 <h2>ex05 - Component LifeCycle Practice</h2>
-                    <Clock />
+                    <Clock 
+                        hours={state.hours}
+                        minutes={'02'}
+                        seconds={'50'}
+                        session={'am'}
+                        />
             </div>
         );
     }

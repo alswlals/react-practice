@@ -41,7 +41,7 @@ export default class LifeCircle extends Component {
 
     /**
      *
-     *  render 메소드 호출 후, DOM에 변화를 반영하기 직전에 호출 [react v16.3]
+     *  render 메소드 호출 후, DOM에 변화를 *반영하기 직전에 호출* [react v16.3]
      *  반환 값은 다음 메소드 componentDidUpdate()의 세번째 파라미터(snapshot)로 전달.
      *  변경 전의 props, state 접근이 가능하다.
      *  주로 업데이트 직전의 값을 참고해야 할 일이 있을 때 오버라이딩 한다.

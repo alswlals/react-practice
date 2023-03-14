@@ -3,13 +3,26 @@ import './assets/scss/App.scss'
 import Clock from './Clock';
 
 export default function App() {
+    const [ticks, setTicks] = useState(0); //10의 배수일 때 없어지게 함
 
-
+    useEffect(() => {
+        setInterval(function(){
+//ticks ++
+        }, 1000)
+    }, [])
     return (
-            <Clock
-                message={'ex05: useEffect Hook example'}
-                hours={state.hours}
-                minutes={state.minutes}
-                seconds={state.seconds}/>
+        <div>
+            <span>{ticks}</span>
+
+            {
+                ticks % 10 === 0 ? 
+                null :
+                <Clock
+                    message={'ex05: useEffect Hook example'}
+                    hours={state.hours}
+                    minutes={state.minutes}
+                    seconds={state.seconds}/>
+                }
+        </div>
     );
 }
