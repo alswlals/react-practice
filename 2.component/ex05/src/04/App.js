@@ -6,7 +6,7 @@ export default function App() {
     const [ticks, setTicks] = useState(0); //10의 배수일 때 없어지게 함
     const [date, setDate] = useState(new Date());
     useEffect(() => {
-        let timerID = setInterval(() => {
+        const timerID = setInterval(() => {
             setDate(new Date());  
             setTicks((ticks) => ticks+1);
         }, 1000);
@@ -18,7 +18,7 @@ export default function App() {
     return (
         <div>
             <span>{ticks}</span>
-
+            
             {
                 ticks % 10 === 0 ? 
                 null :
