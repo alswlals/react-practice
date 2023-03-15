@@ -1,25 +1,136 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './assets/css/App.css';
 import RegisterForm from './RegisterForm';
 import Emaillist from './Emaillist';
 import Searchbar from './Searchbar';
-import data from './assets/json/data.json'
-
  
-export default function App(props) {
-    const [emails, setEmails] = useState(data);
-    const notifyKeyWordChanged = function(keyword){
-        /** keyword가 firstName or lastName or email */
-        const emails = data.filter(email => email.firstName.includes(keyword) || email.lastName.includes(keyword) || email.email.includes(keyword));
-        setEmails(emails);
+const App = () => {
+    const [emails, setEmails] = useState([]);
+
+    const fetchEmails = async () => {
+        try {
+            
+            const response = await fetch('/api', {
+                method: 'get',
+                headers:{
+                    'Accept': 'application/json'
+                }
+            });
+
+            if(!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`)
+            }
+
+            const json = await response.json();
+            if(json.result !== 'success'){
+                throw new Error(`${json.result} ${json.message}`)
+            }
+            setEmails(json.data);
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    useEffect(() => {
+        fetchEmails()
+    }, [])
+
+    const addEmails = async (firstName, lastName, email) => {
+        const newEmails = {
+            no: null,
+            firstName: firstName,
+            lastName: lastName,
+            email: email
+        }
+        try {
+            const response = await fetch(`/api`, {
+                method: 'post',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newEmails)
+            });
+
+            if(!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`);
+            }
+
+            const json = await response.json();
+            if(json.result !== 'success') {
+                throw new Error(`${json.result} ${json.message}`)
+            }
+            setEmails([json.data, ...emails]);
+            // fetchEmails();
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    const deleteEmails = async (no) => {
+        const removeEmail={
+            no:no
+        }
+        try {
+            const response = await fetch(`/api/${no}`, {
+                method: 'delete',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(removeEmail)
+            });
+
+            if(!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`);
+            }
+
+            const json = await response.json();
+            if(json.result !== 'success') {
+                throw new Error(`${json.result} ${json.message}`)
+            }
+            setEmails(emails.filter((email) => email.no !== json.data.no));
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    const notifyKeyWordChanges = async(keyword) => {
+        try {
+            const response = await fetch(`/api?kwd=${keyword}`, {
+                method: 'get',
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if(!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`);
+            }
+
+            const json = await response.json();
+            if(json.result !== 'success') {
+                throw new Error(`${json.result} ${json.message}`)
+            }
+
+            setEmails(json.data);
+
+        } catch (error) {
+            console.log(error.message)
+        }
     }
 
     return (
         <div id='App'className={'App'} >
-            <RegisterForm />
-            <Searchbar callback = {notifyKeyWordChanged} />
-            <Emaillist emails={emails} />
+            <RegisterForm 
+                callbackAddEmails={addEmails} />
+            <Searchbar 
+                callbackKeyword={notifyKeyWordChanges}/>
+            <Emaillist 
+                emails={emails}
+                 callbackDeleteEmails={deleteEmails} />
         </div>
     );
 } 
 
+export default App;
