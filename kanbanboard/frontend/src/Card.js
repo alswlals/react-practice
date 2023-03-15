@@ -22,8 +22,20 @@ const Card = ({no, title, description}) => {
                         try{
                         const response = await fetch(`/api/task?cardNo=${no}`, {
                             method: 'get',
-                            headers: ''
+                            headers: {
+                                'Accept': 'application/json'
+                            }
                         });
+                        if(!response.ok) {
+                            throw new Error(`${response.status} ${response.statusText}`);
+                        }
+            
+                        const json = await response.json();
+                        if(json.result !== 'success') {
+                            throw new Error(`${json.result} ${json.message}`)
+                        }
+            
+                        setTasks(json.data);
                         } catch(err) {
                             console.log(err.message)
                         }
