@@ -36,11 +36,11 @@ public class ApiController {
 	}
 	
 	@DeleteMapping("/api")
-	public ResponseEntity<JsonResult> delete(@RequestBody EmaillistVo vo){
-		emaillistService.delete(vo.getNo());
+	public ResponseEntity<JsonResult> delete(@RequestBody Long no){
+		emaillistService.delete(no);
 		
 		return ResponseEntity
 				.status(HttpStatus.OK)
-				.body(JsonResult.success(vo));
+				.body(JsonResult.success(no));
 	}
 }
