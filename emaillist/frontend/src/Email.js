@@ -7,7 +7,7 @@ import styles from './assets/css/Emaillist.css';
        {firstName} {lastName}
         <br/>
         {email}
-        <a href='' onClick={() =>callbackDeleteEmails(no)} />
+        <a href='' onClick={e =>callbackDeleteEmails(no, e)} />
     </li>
   )
 }

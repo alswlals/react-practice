@@ -7,12 +7,12 @@ const Emaillist = ({emails, callbackDeleteEmails}) => {
         <ul className={styles.Emaillist}>
             {
                  emails.map(email => <Email
-                                    key={email.no}
-                                    no={email.no}
-                                    firstName={email.firstName}
-                                    lastName={email.lastName}
-                                    email={email.email}
-                                    callbackDeleteEmails={callbackDeleteEmails} />)       
+                                        key={email.no}
+                                        no={email.no}
+                                        firstName={email.firstName}
+                                        lastName={email.lastName}
+                                        email={email.email}
+                                        callbackDeleteEmails={callbackDeleteEmails} />)       
             }
          </ul>
     );

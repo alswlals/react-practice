@@ -61,26 +61,21 @@ const App = () => {
                 throw new Error(`${json.result} ${json.message}`)
             }
             setEmails([json.data, ...emails]);
-            // fetchEmails();
         } catch (error) {
             console.log(error.message)
         }
     }
 
     const deleteEmails = async (no) => {
-        const removeEmail={
-            no:no
-        }
+        console.log("dddddd", no)
         try {
             const response = await fetch(`/api/${no}`, {
                 method: 'delete',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(removeEmail)
+                }
             });
-
             if(!response.ok) {
                 throw new Error(`${response.status} ${response.statusText}`);
             }
@@ -89,7 +84,8 @@ const App = () => {
             if(json.result !== 'success') {
                 throw new Error(`${json.result} ${json.message}`)
             }
-            setEmails(emails.filter((email) => email.no !== json.data.no));
+            const newEmails = emails.filter((email) => email.no !== no);
+            setEmails(newEmails);
         } catch (error) {
             console.log(error.message)
         }
@@ -128,7 +124,7 @@ const App = () => {
                 callbackKeyword={notifyKeyWordChanges}/>
             <Emaillist 
                 emails={emails}
-                 callbackDeleteEmails={deleteEmails} />
+                callbackDeleteEmails={deleteEmails} />
         </div>
     );
 } 
