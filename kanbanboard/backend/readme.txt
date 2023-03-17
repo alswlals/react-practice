@@ -8,6 +8,29 @@
 		# java -Dspring.profiles.active=production -jar kanbanboard/backend/target/kanbanboard.jar
 
 		netstat -anp | grep 8088 포트 확인하고 실행할 포트입력
+		
+2. ssh 연결(ssh key 인증)
+	1) key 생성하기
+		$ ssh-keygen -t rsa -b 2048 -m PEM -C "awlals616@gmail.com"
+						암호화  파일길이  파일형식 	코멘
+	2) key 생성 확인
+		- ~/.ssh/id_rsa : private key
+		- ~/.ssh/id_rsa.pub : public key
+	3) 공개키를 서버에 설치하기
+		# mv ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys 
+	4) 연결 테스트
+		# ssh -i mykey.pem root@192.168.64.2
+	    # ssh root@192.168.64.2
+	   
+	   vi /etc/ssh/sshd_config
+	   #PermitRootLogin prohibit-password   -> PermitRootLogin yes
+	   systemctl restart sshd
+	
+	5) jenkins
+		- Publish over SSH 플러그인 설치
+		- Publish over SSH 플러그인 ssh server 등록 (springboot-publish-server)
+		- 프로젝트의 빌드 후 조치(post-build action)의 Send build artifacts over SSH 설정
+		
 
 =================================================================
 
