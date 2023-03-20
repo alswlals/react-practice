@@ -24,10 +24,20 @@
 	    # ssh root@192.168.64.2
 	   
 	   vi /etc/ssh/sshd_config
-	   #PermitRootLogin prohibit-password   -> PermitRootLogin yes
+	   # PermitRootLogin prohibit-password   -> PermitRootLogin yes
 	   systemctl restart sshd
+	   
+	5) ssh 연결 환경 설정
+		- ~/.ssh/environment
+		======================
+		# echo $PATH
+		/root/.local/bin:/root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/local/douzone2023/java/bin:/usr/local/douzone2023/git/bin:/usr/local/douzone2023/maven3.8/bin:/usr/local/douzone2023/python/bin
+		======================
+		
+		-etc/ssh/sshd_config
+		PermitUserEnvironment yes
 	
-	5) jenkins
+	6) jenkins
 		- Publish over SSH 플러그인 설치
 		- Publish over SSH 플러그인 ssh server 등록 (springboot-publish-server)
 		- 프로젝트의 빌드 후 조치(post-build action)의 Send build artifacts over SSH 설정
