@@ -1,6 +1,6 @@
 #! /bin/bash
 
-APPLICATION_NAME=kanbanboard
+APPLICATION_NAME=kan
 SCRIPT_DIR=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
 PID=$(ps -ef | grep java | grep $APPLICATION_NAME.jar | awk '{print $2}')
 
@@ -13,4 +13,4 @@ fi
 
 echo "starting [$APPLICATION_NAME]"
 cd $SCRIPT_DIR
-nohup java -Dspring.profiles.active=production -jar $SCRIPT_DIR/$APPLICATION_NAME.jar >> $SCRIPT_DIR/launch.log &
+nohup java -Dspring.profiles.active=production -jar kanbanboard.jar >> launch.log 2>&1 &
