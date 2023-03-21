@@ -1,58 +1,40 @@
-# active spring boot profile
 spring:
+  application:
+    name: emaillist
   profiles:
     active: development
-
----
-# common spring boot configuration
-spring:
   mvc:
-    # Path pattern used for static resources
     static-path-pattern: /assets/**
-
-    # Whether a "NoHandlerFoundException" should be thrown if no Handler was found to process a request
     throw-exception-if-no-handler-found: true
   web:
     resources:
-      # Locations of static resources
       static-locations: classpath:/assets/
-
   thymeleaf:
     prefix: classpath:templates/
     check-template-location: true
-    mode: HTML5
+    mode: HTML
     suffix: .html
     cache: false
 
-  # datasource
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;MODE=MYSQL
-    username: sa
-    password:
-
-# mybatis
 mybatis:
   config-location: classpath:mybatis/configuration.xml
 
-# logging
-logging:
-  level:
-    root: INFO
-
 ---
-# development profile: spring boot configuration
+#
+# development configuration
+#
 spring:
   config:
     activate:
       on-profile: development
-
-  # devtools - live reload
   devtools:
     livereload:
       enabled: true
-
-# server
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://192.168.64.2:3306/webdb?charset=utf8
+    username: webdb
+    password: webdb
 server:
   port: 8080
   servlet:
@@ -60,15 +42,25 @@ server:
     encoding:
       charset: UTF-8
       enabled: true
+logging:
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n"
+  level:
+    root: INFO
 
 ---
-# production profile: spring boot configuration
+#
+# production configuration
+#
 spring:
   config:
     activate:
       on-profile: production
-
-# server
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://192.168.64.2:3306/webdb?charset=utf8
+    username: webdb
+    password: webdb
 server:
   port: 8088
   servlet:
@@ -76,3 +68,19 @@ server:
     encoding:
       charset: UTF-8
       enabled: true
+logging:
+  pattern:
+    file: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n"
+  logback:
+    rollingpolicy:
+      file-name-pattern: "logs/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.zip"
+      max-file-size: 10MB
+      max-history: 10
+  file:
+    name: logs/${spring.application.name}.log
+  level:
+    root: WARN
+    me:
+      kickscar:
+        mysite:
+          exception: ERROR
