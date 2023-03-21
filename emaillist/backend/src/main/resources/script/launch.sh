@@ -13,4 +13,4 @@ fi
 
 echo "starting [$APPLICATION_NAME]"
 cd $SCRIPT_DIR
-nohup java -Dspring.profiles.active=production -jar kanbanboard.jar >> launch.log 2>&1 &
+nohup java -Dspring.profiles.active=production -jar emaillist.jar >> launch.log 2>&1 &
