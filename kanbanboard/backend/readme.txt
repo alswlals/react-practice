@@ -14,11 +14,17 @@
 		$ ssh-keygen -t rsa -b 2048 -m PEM -C "awlals616@gmail.com"
 						암호화  파일길이  파일형식 	코멘
 		$ ssh-keygen -t ecdsa -b 521 -m PEM -C "awlals616@gmail.com"
+		
+		
 	2) key 생성 확인
 		- ~/.ssh/id_rsa : private key
 		- ~/.ssh/id_rsa.pub : public key
+		
 	3) 공개키를 서버에 설치하기
 		# mv ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys 
+		
+		mv ~/.ssh/id_ecdsa.pub ~/.ssh/authorized_keys
+		
 	4) 연결 테스트
 		# ssh -i mykey.pem root@192.168.64.2
 	    # ssh root@192.168.64.2
@@ -31,7 +37,7 @@
 		- ~/.ssh/environment
 		======================
 		# echo $PATH
-		/root/.local/bin:/root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/local/douzone2023/java/bin:/usr/local/douzone2023/git/bin:/usr/local/douzone2023/maven3.8/bin:/usr/local/douzone2023/python/bin
+		PATH=/root/.local/bin:/root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/local/douzone2023/java/bin:/usr/local/douzone2023/git/bin:/usr/local/douzone2023/maven3.8/bin:/usr/local/douzone2023/python/bin
 		======================
 		
 		-etc/ssh/sshd_config
@@ -57,7 +63,7 @@
 		- babel.config.json
 	3) npm scripting
 		"scripts": {
-		    "debug": "npx webpack serve --config config/webpack.config.js --progress --mode development --env",
+		    "start": "npx webpack serve --config config/webpack.config.js --progress --mode development --env",
 		    "build": "npx webpack --config config/webpack.config.js --mode production"
 		  },
 	4) 테스트(개발모드)
